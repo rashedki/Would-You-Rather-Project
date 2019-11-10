@@ -35,11 +35,11 @@ class Menu extends Component {
           >Leader Board
           </NavLink>
           <NavLink
-            to="/login"
+            to="/logout"
             exact
             className="item"
             activeClassName="ui right floated item"
-          >Login
+          >Logout
           </NavLink>
         </div>
       </div>

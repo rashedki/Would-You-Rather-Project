@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react"
-import {BrowserRouter, Switch, Route} from "react-router-dom"
+import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom"
 import {connect} from "react-redux"
 import {handleInitialData} from "../actions/shared"
 import Menu from "./Menu"
@@ -8,6 +8,7 @@ import QuestionsList from "./QuestionsList"
 import NewQuestion from "./NewQuestion"
 import LeaderBoard from "./LeaderBoard"
 import Login from "./Login"
+import Logout from "./Logout"
 
 class App extends Component {
   componentDidMount() {
@@ -15,6 +16,17 @@ class App extends Component {
     handleInitialData();
   }
   render() {
+    const { authedUser } = this.props;
+    if (!authedUser) {
+      return (
+        <BrowserRouter>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Redirect to="/login" />
+          </Switch>
+        </BrowserRouter>
+      );
+    }
     return (
       <BrowserRouter>
         <Fragment>
@@ -24,7 +36,8 @@ class App extends Component {
                 <Route path="/" exact component={QuestionsList} />
                 <Route path="/new-question" component={NewQuestion} />
                 <Route path="/leader-board" component={LeaderBoard} />
-                <Route path="/login" component={Login} />
+                  <Route path="/logout" component={Logout} />
+                  <Redirect to="/" />
               </Switch>
             </div>
             <Footer/>
@@ -34,8 +47,9 @@ class App extends Component {
   }
 }
 const mapStateToProps = state => {
-   console.log(state);
-  return {};
+  console.log(state);
+const { authedUser } = state;
+return { authedUser };
 };
 
 export default connect(

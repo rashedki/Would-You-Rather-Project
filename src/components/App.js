@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from "react"
 import {BrowserRouter, Switch, Route} from "react-router-dom"
 import {connect} from "react-redux"
-import {handleInitialData} from "../action/shared"
+import {handleInitialData} from "../actions/shared"
 import Menu from "./Menu"
 import Footer from "./Footer"
 import QuestionsList from "./QuestionsList"

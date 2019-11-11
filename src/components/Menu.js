@@ -16,10 +16,10 @@ class Menu extends Component {
             activeClassName="active"
           >
           <img
-            className="ui image"
+            className="ui mini image"
             src="/wouldYouRather_icon.png"
             alt=""
-            style={{marginRight: "0.5em", width: "50px"}}
+            style={{marginRight: "0.5em"}}
           />
           Home
           </NavLink>

@@ -6,6 +6,7 @@ import Menu from "./Menu"
 import Footer from "./Footer"
 import QuestionsList from "./QuestionsList"
 import NewQuestion from "./NewQuestion"
+import QuestionsView from "./QuestionsView"
 import LeaderBoard from "./LeaderBoard"
 import Login from "./Login"
 import Logout from "./Logout"
@@ -35,6 +36,7 @@ class App extends Component {
               <Switch>
                 <Route path="/" exact component={QuestionsList} />
                 <Route path="/new-question" component={NewQuestion} />
+                <Route path="/view-question" component={QuestionsView} />
                 <Route path="/leader-board" component={LeaderBoard} />
                   <Route path="/logout" component={Logout} />
                   <Redirect to="/" />

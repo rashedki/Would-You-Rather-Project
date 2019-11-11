@@ -35,15 +35,12 @@ class NewQuesiton extends Component {
         }
       });
     }
-    const success = await this.props.handleAddQuestion({
+    await this.props.handleAddQuestion({
       optionOneText,
       optionTwoText,
       author
     });
-    if (success) {
-      console.log("redirect");
-      history.push("/");
-    }
+    history.push("/")
   };
   render() {
     const {authedUser, users} = this.props;

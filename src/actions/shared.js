@@ -9,6 +9,6 @@ export const handleInitialData = () => dispatch => {
     dispatch(loadQuestions(questions));
 
     // auto-login for debugging
-   dispatch(setAuthedUser("sarahedo"));
+   //dispatch(setAuthedUser("sarahedo"));
   });
 };

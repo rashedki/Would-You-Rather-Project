@@ -89,9 +89,21 @@ class QuestionsList extends Component {
     );
   }
 }
+
+const sortQuestionsByTimeStamp = questions => {
+  const questionsSorted = {};
+  Object.keys(questions)
+    .map(key => questions[key])
+    .sort((a, b) => b.timestamp - a.timestamp)
+    .forEach(question => {
+      questionsSorted[question.id] = question;
+    });
+  return questionsSorted;
+};
+
 const mapStateToProps = state => {
   return {
-    questions: state.questions,
+    questions: sortQuestionsByTimeStamp(state.questions),
     users: state.users,
     authedUser: state.authedUser
   };

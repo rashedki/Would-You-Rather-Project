@@ -1,4 +1,5 @@
 import { saveQuestionAnswer, saveQuestion } from "../utils/api"
+import {userAddedQuestion, userAnsweredQuestion } from "./users"
 
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
 export const ANSWER_QUESTION = "ANSWER_QUESTION";
@@ -20,6 +21,7 @@ function answerQuestion({ authedUser, qid, answer }) {
 export function handleAnswerQuestion({ authedUser, qid, answer }) {
   return dispatch => {
     dispatch(answerQuestion({ authedUser, qid, answer }));
+    dispatch(userAnsweredQuestion({authedUser, qid, answer}));
 
     return saveQuestionAnswer({ authedUser, qid, answer })
       .then(() => {
@@ -33,7 +35,7 @@ export function handleAnswerQuestion({ authedUser, qid, answer }) {
   };
 }
 
-function addQuestion(question) {
+function addQuestion({question}) {
   return {
     type: ADD_QUESTION,
     question
@@ -45,6 +47,8 @@ export function handleAddQuestion({ optionOneText, optionTwoText, author }) {
     return saveQuestion({ optionOneText, optionTwoText, author }).then(
       question => {
         return dispatch(addQuestion(question));
+        dispatch(userAddedQuestion({ authedUser: author, qid: question.id }));
+        return dispatch(addQuestion({ question }));
       }
     );
   };

@@ -7,7 +7,7 @@ class NewQuesiton extends Component {
   state = { optionOne: "", optionTwo: "" };
 
   handleOnChange = (e, data) => {
-    this.setState({ [data.id]: data.value.trim() });
+    this.setState({ [data.id]: data.value });
   };
 
   handleClick = async () => {

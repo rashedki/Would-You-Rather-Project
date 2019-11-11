@@ -9,11 +9,11 @@ class QuestionsList extends Component {
     const {questions, users} = this.props;
     const cards = Object.keys(questions)
       .filter(filterLogic)
-      .map(id => {
-        const question = questions[id];
+      .map(qid => {
+        const question = questions[qid];
         const user = users[question.author];
         return (
-        <Card key={id}>
+        <Card key={qid}>
           <Card.Content>
             <Image
               floated="right"
@@ -27,9 +27,9 @@ class QuestionsList extends Component {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <div className="ui buttons">
-              <Link to={`/view-question/${id}`}>
-                <Button basic color="black">
+            <div className="ui two buttons">
+              <Link to={`/view-question/${qid}`} style={{width: "100%"}}>
+                <Button fluid basic color="black">
                   View Poll
                 </Button>
               </Link>
@@ -38,16 +38,17 @@ class QuestionsList extends Component {
         </Card>
         );
       });
-      return [
-        cards.length,
-        <Card.Group itemsPerRow={this.cardItemsPerRow}>{cards}</Card.Group>
-      ];
+      return cards.length
+        ? [
+            cards.length,
+            <Card.Group itemsPerRow={this.cardItemsPerRow}>{cards}</Card.Group>
+          ] : [cards.length];
   };
   render() {
     const { questions, authedUser } = this.props;
     const [
       unansweredQuestionsCount,
-      unansweredQuestionsContent
+      unansweredQuestionsContent = "All questions have been answered."
     ] = this.getCardsFromQuestions(
       id =>
         !questions[id].optionOne.votes.includes(authedUser) &&
@@ -55,11 +56,11 @@ class QuestionsList extends Component {
     );
     const [
       answeredQuestionsCount,
-      answeredQuestionsContent
+      answeredQuestionsContent = "There are no answered questions available."
     ] = this.getCardsFromQuestions(
-      id =>
-        questions[id].optionOne.votes.includes(authedUser) ||
-        questions[id].optionTwo.votes.includes(authedUser)
+      qid =>
+        questions[qid].optionOne.votes.includes(authedUser) ||
+        questions[qid].optionTwo.votes.includes(authedUser)
     );
     const panes = [
       {

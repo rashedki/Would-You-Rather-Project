@@ -47,6 +47,11 @@ class Login extends Component {
                     onChange={this.handleUserSelection}
                   />
                 </div>
+                <div className="field">
+                  Select a user from above and click the login button.
+                  <br />
+                  You don't required to enter a password.
+                </div>
                 <div
                   className="ui fluid black submit button"
                   onClick={this.handleUserLogin}

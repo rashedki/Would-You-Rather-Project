@@ -6,7 +6,7 @@ import {Provider} from "react-redux"
 import reducer from "./reducers"
 import thunk from "redux-thunk"
 import App from './components/App';
-import * as serviceWorker from './serviceWorker';
+//import * as serviceWorker from './serviceWorker';
 
 //ReactDOM.render(<App />, document.getElementById('root'));
 

@@ -36,10 +36,10 @@ class App extends Component {
               <Switch>
                 <Route path="/" exact component={QuestionsList} />
                 <Route path="/new-question" component={NewQuestion} />
-                <Route path="/view-question" component={QuestionsView} />
+                <Route path="/view-question/:qid" component={QuestionsView} />
                 <Route path="/leader-board" component={LeaderBoard} />
-                  <Route path="/logout" component={Logout} />
-                  <Redirect to="/" />
+                <Route path="/logout" component={Logout} />
+                <Redirect to="/" />
               </Switch>
             </div>
             <Footer/>

@@ -46,7 +46,7 @@ class QuestionsView extends Component {
           <Card.Description>
             <Segment>
               {votedForOptionOne && (
-                <Label as="a" color="red" ribbon="right">
+                <Label color="red" ribbon="right">
                   Your Vote
                 </Label>
               )}
@@ -83,7 +83,7 @@ class QuestionsView extends Component {
         <Card.Content>
           <Image floated="right" size="mini" src={user.avatarURL} />
           <Card.Header>{user.name}</Card.Header>
-          <Card.Meta>Would you rather</Card.Meta>
+          <Card.Meta>Would You Rather</Card.Meta>
           <Card.Description>
             <Form>
               <Form.Field>

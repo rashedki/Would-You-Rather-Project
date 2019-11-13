@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { Button, Card, Form, Image, Input, Message } from "semantic-ui-react"
 import { handleAddQuestion } from "../actions/questions"
 
-class NewQuesiton extends Component {
+class NewQuestion extends Component {
   state = {
     optionOne: "",
     optionTwo: "",
@@ -16,7 +16,7 @@ class NewQuesiton extends Component {
 
   handleClick = async () => {
     const { optionOne: optionOneText, optionTwo: optionTwoText } = this.state;
-    const { authedUser: author, history } = this.props;
+    const { authedUser: author, history , resetActiveIndexToZero} = this.props;
 
     if (!optionOneText || !optionTwoText) {
       //return alert("Please enter both options");
@@ -40,6 +40,7 @@ class NewQuesiton extends Component {
       optionTwoText,
       author
     });
+    resetActiveIndexToZero();
     history.push("/")
   };
   render() {
@@ -97,4 +98,4 @@ const mapStateToProps = state => {
   return { users: state.users, authedUser: state.authedUser };
 };
 
-export default connect(mapStateToProps, { handleAddQuestion })(NewQuesiton);
+export default connect(mapStateToProps, { handleAddQuestion })(NewQuestion);

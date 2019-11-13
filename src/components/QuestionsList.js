@@ -45,7 +45,7 @@ class QuestionsList extends Component {
           ] : [cards.length];
   };
   render() {
-    const { questions, authedUser } = this.props;
+    const { questions, authedUser, activeIndex, handleTabChange } = this.props;
     const [
       unansweredQuestionsCount,
       unansweredQuestionsContent = "All questions have been answered."
@@ -83,7 +83,11 @@ class QuestionsList extends Component {
     return (
       <div>
         <div>
-          <Tab panes={panes} />
+          <Tab
+            panes={panes}
+            activeIndex={activeIndex}
+            onTabChange={(e, data) => handleTabChange(e, data)}
+          />
         </div>
       </div>
     );

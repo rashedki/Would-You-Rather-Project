@@ -1,16 +1,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Card, Image, Segment, Label, Progress, Button, Form, Radio} from "semantic-ui-react";
+import {Card, Image, Segment, Label, Progress, Button, Form, Radio, Message} from "semantic-ui-react";
 import { handleAnswerQuestion } from "../actions/questions";
 
 class QuestionsView extends Component {
-  state = { votedForOption: null };
+  state = { votedForOption: null, message: {hidden: true, content: ""} };
   handleChange = (e, data) => {
     this.setState({ votedForOption: data.value });
   };
   handleClick = () => {
     if (!this.state.votedForOption) {
-      return alert("Please select an option");
+      this.setState({
+        message: {
+          hidden: false,
+          content: "Please select an option first."
+        }
+      });
+      return;
+    } else {
+      this.setState({
+        message: {
+          hidden: true,
+          content: ""
+        }
+      });
     }
     // action
     const qid = this.props.match.params.qid;
@@ -25,6 +38,7 @@ class QuestionsView extends Component {
 
     const question = questions[qid];
     const user = users[question.author];
+
 
     const votedForOptionOne = question.optionOne.votes.includes(authedUser);
     const votedForOptionTwo = question.optionTwo.votes.includes(authedUser);
@@ -42,7 +56,7 @@ class QuestionsView extends Component {
         <Card.Content>
           <Image floated="right" size="mini" src={user.avatarURL} />
           <Card.Header>{user.name}</Card.Header>
-          <Card.Meta>Would You rather</Card.Meta>
+          <Card.Meta>Would You Rather</Card.Meta>
           <Card.Description>
             <Segment>
               {votedForOptionOne && (
@@ -77,6 +91,7 @@ class QuestionsView extends Component {
 
     const question = questions[qid];
     const user = users[question.author];
+    const {message} = this.state;
 
     return (
       <Card key={qid}>
@@ -104,6 +119,9 @@ class QuestionsView extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Field>
+              <Message hidden={message.hidden} negative>
+                {message.content}
+              </Message>
             </Form>
           </Card.Description>
         </Card.Content>

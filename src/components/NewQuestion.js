@@ -23,7 +23,7 @@ class NewQuesiton extends Component {
       this.setState({
         message: {
           hidden: false,
-          content: "Please enter the two Options. Option One as a Text and Option Two as a Text."
+          content: "Please enter the two Options. Option One and Option Two."
         }
       });
       return;
@@ -45,6 +45,7 @@ class NewQuesiton extends Component {
   render() {
     const {authedUser, users} = this.props;
     const user = users[authedUser];
+    const {message} = this.state;
     return (
       <div>
         <Card.Group centered>
@@ -73,8 +74,8 @@ class NewQuesiton extends Component {
                       onChange={this.handleOnChange}
                     />
                   </Form.Field>
-                  <Message hidden={this.state.message.hidden} negative>
-                    {this.state.message.content}
+                  <Message hidden={message.hidden} negative>
+                    {message.content}
                   </Message>
                 </Form>
               </Card.Description>

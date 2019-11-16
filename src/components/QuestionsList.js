@@ -22,9 +22,9 @@ class QuestionsList extends Component {
             />
           <Card.Header>{user.name} asks</Card.Header>
             <div>
-                  Would you rather {question.optionOne.text} or{" "}
-                  {question.optionTwo.text}?
-                </div>
+              Would you rather {question.optionOne.text} or{" "}
+              {question.optionTwo.text}?
+            </div>
           </Card.Content>
           <Card.Content extra>
             <div className="ui two buttons">

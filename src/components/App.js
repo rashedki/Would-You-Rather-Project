@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react"
-import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom"
+import {BrowserRouter, Switch, Route} from "react-router-dom"
 import {connect} from "react-redux"
 import LoadingBar from "react-redux-loading-bar"
 import {handleInitialData} from "../actions/shared"
@@ -11,6 +11,7 @@ import QuestionsView from "./QuestionsView"
 import LeaderBoard from "./LeaderBoard"
 import Login from "./Login"
 import Logout from "./Logout"
+import ErrorPage from "./ErrorPage"
 
 class App extends Component {
 
@@ -20,7 +21,6 @@ class App extends Component {
     this.setState({ activeIndex });
   };
   resetActiveIndexToZero = () => {
-      console.log("will reset active index to zero");
       this.setState({ activeIndex: 0 });
     };
   componentDidMount() {
@@ -33,8 +33,7 @@ class App extends Component {
       return (
         <BrowserRouter>
           <Switch>
-            <Route path="/login" component={Login} />
-            <Redirect to="/login" />
+            <Route path="/" component={Login} />
           </Switch>
         </BrowserRouter>
       );
@@ -57,10 +56,9 @@ class App extends Component {
                     />
                   );
                 }}
-                // component={QuestionList}
               />
               <Route
-              path="/new-question"
+              path="/add"
               render={history => {
                 return (
                   <NewQuestion
@@ -70,10 +68,11 @@ class App extends Component {
                 );
               }}
             />
-                <Route path="/view-question/:qid" component={QuestionsView} />
-                <Route path="/leader-board" component={LeaderBoard} />
+                <Route path="/questions/:question_id" component={QuestionsView} />
+                <Route path="/leaderboard" component={LeaderBoard} />
                 <Route path="/logout" component={Logout} />
-                <Redirect to="/" />
+                <Route path="/404" component={ErrorPage} />
+                <Route to="/" component={ErrorPage}/>
               </Switch>
             </div>
             <Footer/>

@@ -9,11 +9,23 @@ class Login extends Component {
     message: { hidden: true, content: "" }
    };
 
+   referrer = null;
+
+   componentDidMount() {
+     const {
+       history,
+       location: { pathname }
+     } = this.props;
+     this.referrer = pathname;
+     history.push("/login");
+   }
+
   handleUserSelection = (event, data) => {
     this.setState({ selectedUser: data.value });
   };
 
   handleUserLogin = () => {
+    const { history } = this.props;
     if (!this.state.selectedUser) {
       this.setState({
         message: {
@@ -31,6 +43,11 @@ class Login extends Component {
       });
     }
     this.props.setAuthedUser(this.state.selectedUser);
+    if (this.referrer === "/logout" || this.referrer === "/login") {
+      history.push("/");
+    } else {
+      history.push(this.referrer);
+    }
   };
   render() {
     const { users } = this.props;

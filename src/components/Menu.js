@@ -24,14 +24,15 @@ class Menu extends Component {
           Home
           </NavLink>
           <NavLink
-            to="/new-question"
+            to="/add"
             exact
             className="item"
             activeClassName="active"
-          >New Question
+          >
+            New Question
           </NavLink>
           <NavLink
-            to="/leader-board"
+            to="/leaderboard"
             exact
             className="item"
             activeClassName="active"

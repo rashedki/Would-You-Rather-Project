@@ -10,6 +10,7 @@ class LeaderBoard extends Component {
 
     const awardColors = ["red", "orange", "yellow"];
     let rank = 0;
+    let rankSuffix = ["st", "nd", "rd"];
 
     const usersWithScore = {};
     Object.keys(users).forEach(uid => {
@@ -47,16 +48,25 @@ class LeaderBoard extends Component {
         <Card key={uid}>
           <Image src={user.avatarURL} label={label} />
           <Card.Content>
-            <Card.Header size="mini">{user.name}</Card.Header>
+            <Card.Header>
+              {user.name}
+              <Label size="tiny">
+                {rank}
+                {rankSuffix.shift() || "th"}
+              </Label>
+            </Card.Header>
             <Card.Description>
               <Grid columns={2} divided style={{ fontSize: "1rem" }}>
                 <Grid.Row>
-                  <Grid.Column floated="left" width={7}>
-                    Answered {answeredQuestions}
+                  <Grid.Column floated="left" width={11}>
+                    Answered: {answeredQuestions}
                     <br />
-                    Created {createdQuestions}
+                    Created: {createdQuestions}
                   </Grid.Column>
                   <Grid.Column floated="right" width={5}>
+                    <div>
+                      <strong>Score</strong>
+                    </div>
                     <Label circular color={awardColor} size="large">
                       {score}
                     </Label>

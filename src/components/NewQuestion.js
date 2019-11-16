@@ -52,14 +52,13 @@ class NewQuestion extends Component {
         <Card.Group centered>
           <Card>
             <Card.Content>
-              <Image floated="right" size="mini" src={user.avatarURL} />
-              <Card.Header>{user.name}</Card.Header>
-              <Card.Meta>Would You Rather</Card.Meta>
+              <Image floated="right" size="tiny" src={user.avatarURL} />
+              <Card.Header>{user.name} asks</Card.Header>
+              <div>Would You Rather</div>
               <Card.Description>
                 <Form>
                   <Form.Field>
                     <Input
-                      size="mini"
                       id="optionOne"
                       placeholder="Enter Option One As a Text Here"
                       value={this.state.optionOne}
@@ -68,7 +67,6 @@ class NewQuestion extends Component {
                   </Form.Field>
                   <Form.Field>
                     <Input
-                      size="mini"
                       id="optionTwo"
                       placeholder="Enter Option Two As a Text Here"
                       value={this.state.optionTwo}

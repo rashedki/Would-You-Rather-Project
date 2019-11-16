@@ -26,17 +26,20 @@ class QuestionsView extends Component {
       });
     }
     // action
-    const qid = this.props.match.params.qid;
+    const qid = this.props.match.params.question_id;
     const answer = this.state.votedForOption;
     const { authedUser, handleAnswerQuestion } = this.props;
     handleAnswerQuestion({ authedUser, qid, answer });
   };
 
   questionResult = () => {
-    const qid = this.props.match.params.qid;
+    const qid = this.props.match.params.question_id;
     const { authedUser, questions, users } = this.props;
 
     const question = questions[qid];
+    if (!question) {
+      return;
+    }
     const user = users[question.author];
 
 
@@ -55,8 +58,8 @@ class QuestionsView extends Component {
       <Card key={qid}>
         <Card.Content>
           <Image floated="right" size="mini" src={user.avatarURL} />
-          <Card.Header>{user.name}</Card.Header>
-          <Card.Meta>Would You Rather</Card.Meta>
+          <Card.Header>{user.name} asks</Card.Header>
+          <div>Would You Rather</div>
           <Card.Description>
             <Segment>
               {votedForOptionOne && (
@@ -86,10 +89,13 @@ class QuestionsView extends Component {
     );
   };
   questionAnswer = () => {
-    const qid = this.props.match.params.qid;
+    const qid = this.props.match.params.question_id;
     const { questions, users } = this.props;
 
     const question = questions[qid];
+    if (!question) {
+      return;
+    }
     const user = users[question.author];
     const {message} = this.state;
 
@@ -97,7 +103,7 @@ class QuestionsView extends Component {
       <Card key={qid}>
         <Card.Content>
           <Image floated="right" size="mini" src={user.avatarURL} />
-          <Card.Header>{user.name}</Card.Header>
+          <Card.Header>{user.name} asks</Card.Header>
           <Card.Meta>Would You Rather</Card.Meta>
           <Card.Description>
             <Form>
@@ -138,16 +144,29 @@ class QuestionsView extends Component {
 
   didAnswer() {
     const { authedUser, questions } = this.props;
-    const qid = this.props.match.params.qid;
+    const qid = this.props.match.params.question_id;
+    const question = questions[qid];
+    if (!question) {
+      return null;
+    }
     return (
-      questions[qid].optionOne.votes.includes(authedUser) ||
-      questions[qid].optionTwo.votes.includes(authedUser)
+      question.optionOne.votes.includes(authedUser) ||
+      question.optionTwo.votes.includes(authedUser)
     );
   }
+  componentDidMount() {
+      const { questions } = this.props;
+      const qid = this.props.match.params.question_id;
 
+      const question = questions[qid];
+      if (!question) {
+        const { history } = this.props;
+        history.push("/404");
+      }
+    }
   render() {
     let result;
-    if (this.didAnswer()) {
+    if (this.didAnswer() === true) {
       result = this.questionResult();
     } else {
       result = this.questionAnswer();

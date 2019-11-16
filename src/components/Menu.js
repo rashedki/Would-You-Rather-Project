@@ -17,7 +17,7 @@ class Menu extends Component {
           >
           <img
             className="ui mini image"
-            src="/wouldYouRather_icon.png"
+            src="../wouldYouRather_icon.png"
             alt=""
             style={{marginRight: "0.5em"}}
           />
